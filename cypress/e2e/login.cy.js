@@ -17,7 +17,7 @@ context('Funcionalidade Login', () => {
     });
 
     it('Login com sucesso usando Comando customizado', () => {
-        cy.get('jeane.teste@teste.com.br', 'Juan020817')
+        cy.login('jeane.teste@teste.com.br', 'Juan020817')
         cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, jeane.teste')
     });
 
@@ -31,7 +31,7 @@ context('Funcionalidade Login', () => {
         
     });
 
-    it.only('Deve fazer login com sucesso - sem otimização', () => {
+    it('Deve fazer login com sucesso - sem otimização', () => {
         cy.get('#username').type('jeane.teste@teste.com.br')
         cy.get('#password').type('Juan020817', { log: false })
         cy.get('.woocommerce-form > .button').click()
