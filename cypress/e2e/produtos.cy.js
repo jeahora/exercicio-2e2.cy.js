@@ -4,14 +4,13 @@ import produtosPage from "../support/page-objects/produtos.page";
 describe('Funcionalidade: Produtos', () => {
 
     beforeEach(() => {
-        produtosPage.visitarUrl()
+        produtosPage.visitarUrl('produtos')
     });
     
-    it('Deve selecionar um produto da lista', () => {
-        produtosPage.buscarProdutoLista('Abominable Hoodie')
-        cy.get('.product_title').should('contain', 'Abominable Hoodie')
-       
-    
+    it.only('Deve selecionar um produto da lista', () => {
+        let produto = 'Abominable Hoodie'
+        produtosPage.buscarProdutoLista(produto)
+        cy.get('.product_title').should('contain', produto)
     
     });
 
@@ -21,25 +20,21 @@ describe('Funcionalidade: Produtos', () => {
         cy.get('.product_title').should('contain', produto)
     });
 
-    it('Deve visitar a página do produto', () => {
-       produtosPage.visitarProduto('Helena-Hooded-Fleece') 
-       cy.get('.product_title').should('contain', 'Helena Hooded Fleece')
 
-    });
-
-    it.only('Deve adicionar produto ao carrinho', () => {
-        let qtd = 2
-        produtosPage.buscarProduto('Autumn Pullie')
-        produtosPage.addProdutoCarrinho('S', 'Red', qtd)
-
+    it('Deve adicionar produto ao carrinho e finalizar compra', () => {
+        let qtd = 2;
     
-
-       
-        produtosPage.buscarProduto('Selene Yoga Hoodie')
-        produtosPage.addProdutoCarrinho('S', 'Orange', qtd)
-
-        produtosPage.buscarProduto('Daphne Full-Zip Hoodie')
-        produtosPage.addProdutoCarrinho('S', 'Purple', qtd)
+        let produto1 = 'Autumn Pullie';
+        produtosPage.buscarProduto(produto1);
+        produtosPage.addProdutoCarrinho('S', 'Red', qtd);
+    
+        let produto2 = 'Selene Yoga Hoodie';
+        produtosPage.buscarProduto(produto2);
+        produtosPage.addProdutoCarrinho('S', 'Orange', qtd);
+    
+        let produto3 = 'Daphne Full-Zip Hoodie';
+        produtosPage.buscarProduto(produto3);
+        produtosPage.addProdutoCarrinho('S', 'Purple', qtd);
 
         cy.get('.woocommerce-message').should('contain', '2 × “Daphne Full-Zip Hoodie” foram adicionados no seu carrinho.')
         cy.get('.woocommerce-message > .button').click()

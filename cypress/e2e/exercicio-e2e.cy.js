@@ -11,7 +11,7 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
 });
 
   beforeEach(() => {
-      cy.visit('http://lojaebac.ebaconline.art.br/produtos/')
+      cy.visit('produtos')
   });
 
   it('Deve fazer um pedido na loja Ebac Shop de ponta a ponta', () => {
@@ -22,7 +22,7 @@ context('Exercicio - Testes End-to-end - Fluxo de pedido', () => {
     cy.get('.single_add_to_cart_button').click()
     cy.get('.woocommerce-message').should('contain' , '2 × “Atlas Fitness Tank” foram adicionados no seu carrinho.')
     
-    cy.visit('http://lojaebac.ebaconline.art.br/produtos/');
+    cy.visit('produtos');
 
  
     cy.get('.products > .row').contains('Abominable Hoodie').click()
